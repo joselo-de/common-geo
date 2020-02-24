@@ -23,7 +23,7 @@ def s3_ingest(spark):
   s3.meta.client.meta.events.register('choose-signer.s3.*', disable_signing)
   bucket = 'commoncrawl'
 
-  with open('warc.paths', 'r') as f:
+  with open('input/warc.paths', 'r') as f:
     idx = 0
     keys = f.readlines()
 

@@ -1,8 +1,8 @@
 -- basic queries
 
 -- top 10 non-secure
-select webserver, https, count(webserver) from crawled_domains where https=True group by 1,2 order by 3 desc limit 10;
- webserver            | https |  count  
+select webserver, https, count(webserver) from crawled_domains where https=False group by 1,2 order by 3 desc limit 10;
+      webserver       | https |  count   
 ----------------------+-------+----------
  microsoft-iis/7.5    | f     | 17236023
  apache               | f     | 13749130
@@ -18,7 +18,7 @@ select webserver, https, count(webserver) from crawled_domains where https=True 
 
 
 -- top 10 secure
-select webserver, https, count(webserver) from crawled_domains where https=False group by 1,2 order by 3 desc limit 10;
+select webserver, https, count(webserver) from crawled_domains where https=True igroup by 1,2 order by 3 desc limit 10;
             webserver            | https |  count  
 ---------------------------------+-------+---------
  apache                          | t     | 7840619
@@ -35,7 +35,7 @@ select webserver, https, count(webserver) from crawled_domains where https=False
 
 
 -- secure domains, by page volume 
-select domain, count(domain) from crawled_domains where https=True group by 1 order by 2 desc limit 20; 
+select domain, count(domain) pages from crawled_domains where https=True group by 1 order by 2 desc limit 20;
           domain          | count 
 --------------------------+-------
  patents.google.com       | 65069
@@ -112,4 +112,3 @@ select domain, count(domain) from crawled_domains where domain like 's3%amazon%'
 (18 rows)
 
 -- No. All the S3 zones are represented, but somehow only us-west is exploiting the fact that you can siet up an S3 bucket as a webserver for static content
-
